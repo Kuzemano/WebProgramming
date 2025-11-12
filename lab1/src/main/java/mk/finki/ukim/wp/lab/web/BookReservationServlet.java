@@ -1,6 +1,6 @@
 package mk.finki.ukim.wp.lab.web;
 
-
+/*
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,3 +50,4 @@ public class BookReservationServlet extends HttpServlet {
 
 
 }
+*/

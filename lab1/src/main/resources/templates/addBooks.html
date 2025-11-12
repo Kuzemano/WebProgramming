@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+
+
+    <h1>Add a book</h1>
+
+    <form th:action="@{/books/add}" th:method="post">
+        <label for="title">Title: </label>
+        <input id="title" name="title" type="text">
+
+
+        <label for="genre">Genre: </label>
+        <input id="genre" name="genre" type="text">
+
+        <label for="averageRating">Average Rating: </label>
+        <input id="averageRating" name="averageRating" type="number">
+
+        <input type="submit" value="Submit">
+        <br><br>
+
+        <select name="authorId">
+            <option></option>
+            <option th:each="author : ${authors}" th:text="${author.name}" th:value="${author.getId()}" >
+
+            </option>
+
+        </select>
+
+
+    </form>
+
+
+
+
+
+
+</body>
+</html>

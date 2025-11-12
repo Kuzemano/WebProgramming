@@ -31,7 +31,7 @@
   <h1>Welcome to our Book Reservation App</h1>
 </header>
 <main>
-  <form action="/bookReservation" method="POST">
+
     <h2>Choose a book:</h2>
     <!-- Display radio buttons for each book,
          the value should be the book title
@@ -39,16 +39,26 @@
          Title: <book_title>, Genre: <book_genre>, Rating: <average_rating> -->
     <div th:each="book : ${books}">
     <label>
-        <input type="radio" name="book" id="book" th:value="${book.getTitle()}">
+        <input type="radio" name="book" id="book" th:value="${book.title}">
         Title: <span th:text="${book.getTitle()}"></span>, Genre: <span th:text="${book.getGenre()}"></span>
         Rating: <span th:text="${book.getAverageRating()}"></span>
+        Author full name: <span th:text="${book.getAuthor().getName()}"></span> <span th:text="${book.getAuthor().getSurname()}"></span>
     </label>
+      <form th:action="@{'/books/delete/{id}' (id=${book.getId()})}" th:method="POST">
+        <input type="submit" value="Delete">
+
+      </form>
+
+      Edit:<a th:href="@{'/books/edit/{id}' (id=${book.getId()})}">Edit</a>
 
 
     </div>
 
 
+    <h1>Why not add a new book?</h1>
+    <a th:href="@{/books/add}">Do it!!!</a>
 
+  <form action="/bookReservation" method="POST">
     <h2  >Enter your information:</h2>
     <label>Your Name:</label>
     <input type="text" name="readerName" required><br/>

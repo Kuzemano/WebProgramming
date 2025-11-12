@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form th:action="@{/books/edit}" th:method="post">
+       Title: <input type="text" name="title" id="title">
+       <br></br>Genre: <input type="text" name="genre" id="genre">
+        <br></br>AverageRating: <input type="number" name="averageRating" id="averageRating">
+
+<br>
+        <label >Author
+            <select name="authorId">
+                <option></option>
+                <option th:each="author : ${authors}" th:text="${author.getName()}" th:value="${author.getId()}" >
+
+                </option>
+
+            </select>
+        </label>
+        <input type="number" th:value="${ide}" id="bookId" name="bookId" style="display: none">
+
+        <input type="submit" value="Submit">
+
+
+
+
+    </form>
+
+
+
+
+
+</body>
+</html>
