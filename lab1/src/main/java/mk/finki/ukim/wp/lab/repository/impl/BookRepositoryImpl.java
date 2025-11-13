@@ -54,8 +54,12 @@ public class BookRepositoryImpl implements BookRepository {
         if(booki.isPresent()){
             book = booki.get();
         }
+        Optional<Author> authorOptional = DataHolder.authors.stream().filter(a->a.getId().equals(author)).findFirst();
+        Author auth = null;
+        if(authorOptional.isPresent())
+            auth = authorOptional.get();
 
-        book.setAuthor(DataHolder.authors.stream().filter(a->a.getId().equals(author)).findFirst().get());
+        book.setAuthor(auth);
         book.setGenre(genre);
         book.setTitle(title);
         book.setAverageRating(averageRating);

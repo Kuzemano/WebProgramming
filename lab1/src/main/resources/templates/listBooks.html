@@ -5,7 +5,7 @@
   <title>Book Reservation - Welcome and choose a Book</title>
   <style type="text/css">
     body {
-      width: 800px;
+      width: 1400px;
       margin: auto;
       font-family: Arial, sans-serif;
     }
@@ -32,34 +32,40 @@
 </header>
 <main>
 
-    <h2>Choose a book:</h2>
+
     <!-- Display radio buttons for each book,
          the value should be the book title
          and the displayed text should be:
          Title: <book_title>, Genre: <book_genre>, Rating: <average_rating> -->
-    <div th:each="book : ${books}">
-    <label>
-        <input type="radio" name="book" id="book" th:value="${book.title}">
-        Title: <span th:text="${book.getTitle()}"></span>, Genre: <span th:text="${book.getGenre()}"></span>
-        Rating: <span th:text="${book.getAverageRating()}"></span>
-        Author full name: <span th:text="${book.getAuthor().getName()}"></span> <span th:text="${book.getAuthor().getSurname()}"></span>
-    </label>
-      <form th:action="@{'/books/delete/{id}' (id=${book.getId()})}" th:method="POST">
-        <input type="submit" value="Delete">
 
-      </form>
-
-      Edit:<a th:href="@{'/books/edit/{id}' (id=${book.getId()})}">Edit</a>
-
-
-    </div>
 
 
     <h1>Why not add a new book?</h1>
     <a th:href="@{/books/add}">Do it!!!</a>
 
   <form action="/bookReservation" method="POST">
-    <h2  >Enter your information:</h2>
+      <h2>Choose a book:</h2>
+      <div th:each="book : ${books}">
+
+          <label>
+              <input type="radio" name="book" id="book" th:value="${book.title}" required>
+              Title: <span th:text="${book.getTitle()}"></span>,  Genre: <span th:text="${book.getGenre()}"></span>
+              ,  Rating: <span th:text="${book.getAverageRating()}"></span>
+              ,  Author full name: <span th:text="${book.getAuthor().getName()}"></span> <span th:text="${book.getAuthor().getSurname()}"></span>
+          </label>
+
+
+          <button type="submit"
+                  th:formaction="@{'/books/delete/' + ${book.getId()}}"
+                  formmethod="post">
+              Delete
+          </button>
+          <a th:href="@{'/books/edit/' + ${book.getId()}}">Edit</a>
+
+
+      </div>
+
+      <h2  >Enter your information:</h2>
     <label>Your Name:</label>
     <input type="text" name="readerName" required><br/>
     <label>Your Address:</label>
@@ -69,7 +75,13 @@
     <input type="number" name="numCopies" min="1" max="10" required><br/>
     <br/>
     <input type="submit" value="Reserve Book">
+
+
+
   </form>
+
+
+
   <form action="/wow" method="POST">
     <label>
         Search by text: <input type="text" name="contains" id="cont">

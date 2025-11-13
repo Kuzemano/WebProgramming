@@ -1,6 +1,6 @@
 package mk.finki.ukim.wp.lab.web;
-
 /*
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,6 +34,7 @@ public class BookReservationServlet extends HttpServlet {
 
 
         String title = req.getParameter("book");
+        System.out.println(title);
         String readerName = req.getParameter("readerName");
         String readerAddress = req.getParameter("readerAddress");
         int numCopies = Integer.parseInt(req.getParameter("numCopies"));
@@ -49,5 +50,4 @@ public class BookReservationServlet extends HttpServlet {
 
 
 
-}
-*/
+}*/
