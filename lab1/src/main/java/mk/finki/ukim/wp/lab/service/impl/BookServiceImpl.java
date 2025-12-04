@@ -4,7 +4,6 @@ package mk.finki.ukim.wp.lab.service.impl;
 import mk.finki.ukim.wp.lab.model.Author;
 import mk.finki.ukim.wp.lab.model.Book;
 import mk.finki.ukim.wp.lab.repository.BookRepository;
-import mk.finki.ukim.wp.lab.repository.impl.BookRepositoryImpl;
 import mk.finki.ukim.wp.lab.service.BookService;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class BookServiceImpl implements BookService{
     public final BookRepository bookRepository;
 
-    public BookServiceImpl(BookRepositoryImpl impl){
+    public BookServiceImpl(BookRepository impl){
         this.bookRepository = impl;
     }
 
@@ -24,24 +23,29 @@ public class BookServiceImpl implements BookService{
         return bookRepository.findAll();
     }
 
-    @Override
-    public List<Book> searchBooks(String text, Double rating) {
-        return bookRepository.searchBooks(text, rating);
-    }
 
     @Override
     public Book deleteBook(Long id) {
-        return bookRepository.deleteBook(id);
+        bookRepository.deleteById(id);
+        return null;
     }
 
     @Override
     public Book addBook(String title, String genre, double averageRating, Author author) {
-        return bookRepository.addBook(title, genre, averageRating, author);
+        Book book =  new Book(title, genre, averageRating);
+        book.setAuthor(author);
+        return bookRepository.save(book);
     }
 
     @Override
     public Book editBook(String title, String genre, double averageRating, Long author, Long id) {
-        return bookRepository.editBook(title, genre, averageRating, author, id);
+        bookRepository.deleteById(id);
+        return bookRepository.save(new Book(title, genre, averageRating));
+    }
+
+    @Override
+    public List<Book> findByAuthor(Author author) {
+        return bookRepository.findAllByAuthor(author);
     }
 
 

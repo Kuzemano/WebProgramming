@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface BookService {
     List<Book> listAll();
-    List<Book> searchBooks(String text, Double rating);
+
     Book deleteBook(Long id);
 
     Book addBook(String title, String genre, double averageRating, Author author);
 
     Book editBook(String title, String genre, double averageRating, Long author, Long id);
 
-
+    List<Book> findByAuthor(Author author);
 
 }

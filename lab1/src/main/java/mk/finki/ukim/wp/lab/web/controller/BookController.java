@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/books")
+@RequestMapping(path = {"/books", "", "/"})
 public class BookController {
 
     private final BookService bookService;
@@ -25,10 +25,26 @@ public class BookController {
         this.authorService = impl;
     }
 
+    @GetMapping("/authorBooks/{id}")
+    public String authorBooks(Model model, @PathVariable Long id) {
+        Author author = authorService.findById(id);
+        model.addAttribute("authorName", author.getName());
+        model.addAttribute("books", bookService.findByAuthor(author));
+        return "authorBook";
+
+
+    }
+
+
+
+
+
+
     @GetMapping
     public String getBooksPage(@RequestParam(required = false) String error, Model model){
 
         model.addAttribute("books", bookService.listAll());
+        model.addAttribute("authors", authorService.findAll());
         return  "listBooks";
     }
     @GetMapping("/add")
