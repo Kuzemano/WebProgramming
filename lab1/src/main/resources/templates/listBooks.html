@@ -4,6 +4,15 @@
   <meta charset="utf-8">
   <title>Book Reservation - Welcome and choose a Book</title>
   <style type="text/css">
+      button{
+          background-color: red;
+          margin: 0px 10px;
+          color: white;
+          padding: 10px;
+          font-weight: bold;
+          border: none;
+          border-radius: 25px;
+      }
     body {
       width: 1400px;
       margin: auto;
@@ -49,10 +58,10 @@
       <div th:each="book : ${books}">
 
           <label>
-              <input type="radio" name="book" id="book" th:value="${book.title}" required>
-              Title: <span th:text="${book.getTitle()}"></span>,  Genre: <span th:text="${book.getGenre()}"></span>
-              ,  Rating: <span th:text="${book.getAverageRating()}"></span>
-              ,  Author full name: <span th:text="${book.getAuthor().getName()}"></span> <span th:text="${book.getAuthor().getSurname()}"></span>
+              <!--<input type="radio" name="book" id="book" th:value="${book.title}" required>-->
+              <span style="font-weight: bold">Title: </span> <span th:text="${book.getTitle()}"></span>,  <span style="font-weight: bold">Genre: </span> <span th:text="${book.getGenre()}"></span>
+              ,  <span style="font-weight: bold">Rating: </span> <span th:text="${book.getAverageRating()}"></span>
+              , <span style="font-weight: bold">Author: </span> <span th:text="${book.getAuthor().getName()}"></span> <span th:text="${book.getAuthor().getSurname()}"></span>
           </label>
 
 
@@ -65,7 +74,7 @@
 
 
       </div>
-
+<!--
       <h2  >Enter your information:</h2>
     <label>Your Name:</label>
     <input type="text" name="readerName" ><br/>
@@ -76,13 +85,13 @@
     <input type="number" name="numCopies" min="1" max="10" ><br/>
     <br/>
     <input type="submit" value="Reserve Book">
-
+-->
 
 
   </form>
 
 
-
+<!--
   <form action="/wow" method="POST">
     <label>
         Search by text: <input type="text" name="contains" id="cont">
@@ -93,7 +102,7 @@
     </label><br><br>
     <input type="submit" value="Submit">
   </form>
-
+-->
     <h1>Authors</h1>
     <ul th:each="author : ${authors}">
         <li><a  th:text="${author.getName()}"  th:href="@{'/books/authorBooks/' + ${author.getId()}}"></a></li>

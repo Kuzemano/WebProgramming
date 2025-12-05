@@ -6,15 +6,15 @@
 </head>
 <body>
     <h1 th:text="${authorName}"></h1>
-    <div th:each="book : ${books}">
-        Title: <span th:text="${book.getTitle()}"></span>,  Genre: <span th:text="${book.getGenre()}"></span>
+    <ol th:each="book : ${books}">
+       <li> Title: <span th:text="${book.getTitle()}"></span>,  Genre: <span th:text="${book.getGenre()}"></span>
         ,  Rating: <span th:text="${book.getAverageRating()}"></span>
         ,  Author full name: <span th:text="${book.getAuthor().getName()}"></span> <span th:text="${book.getAuthor().getSurname()}"></span>
+       </li>
 
 
 
-
-    </div>
+    </ol>
 
 
 
