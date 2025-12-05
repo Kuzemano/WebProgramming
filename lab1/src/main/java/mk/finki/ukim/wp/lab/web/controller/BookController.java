@@ -75,6 +75,7 @@ public class BookController {
     public String editBook(@PathVariable Long id, Model model){
         model.addAttribute("authors", authorService.findAll());
         model.addAttribute("ide", id);
+        model.addAttribute("book", bookService.listAll().stream().filter(a->a.getId().equals(id)).toList().getFirst());
         return "editBook";
     }
 

@@ -7,9 +7,9 @@
 <body>
 
     <form th:action="@{/books/edit}" th:method="post">
-       Title: <input type="text" name="title" id="title">
-       <br></br>Genre: <input type="text" name="genre" id="genre">
-        <br></br>AverageRating: <input type="number" name="averageRating" id="averageRating">
+       Title: <input type="text" name="title" id="title" required th:value="${book.getTitle()}">
+       <br></br>Genre: <input type="text" name="genre" id="genre" required th:value="${book.getGenre()}">
+        <br></br>AverageRating: <input type="number" name="averageRating" id="averageRating" required th:value="${book.getAverageRating()}">
 
 <br>
         <label >Author

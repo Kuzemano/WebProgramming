@@ -3,6 +3,7 @@ package mk.finki.ukim.wp.lab.service.impl;
 
 import mk.finki.ukim.wp.lab.model.Author;
 import mk.finki.ukim.wp.lab.model.Book;
+import mk.finki.ukim.wp.lab.repository.AuthorRepository;
 import mk.finki.ukim.wp.lab.repository.BookRepository;
 import mk.finki.ukim.wp.lab.service.BookService;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,12 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService{
     public final BookRepository bookRepository;
+    public final AuthorRepository authorRepository;
 
-    public BookServiceImpl(BookRepository impl){
+    public BookServiceImpl(BookRepository impl, AuthorRepository authorRepository){
         this.bookRepository = impl;
+        this.authorRepository = authorRepository;
+
     }
 
 
@@ -40,7 +44,13 @@ public class BookServiceImpl implements BookService{
     @Override
     public Book editBook(String title, String genre, double averageRating, Long author, Long id) {
         bookRepository.deleteById(id);
-        return bookRepository.save(new Book(title, genre, averageRating));
+        Book book = new Book(title, genre, averageRating);
+        Author auth = authorRepository.findById(author).get();
+        if(!authorRepository.findById(author).isPresent()) {
+            return null;
+        }
+        book.setAuthor(auth);
+        return bookRepository.save(book);
     }
 
     @Override
