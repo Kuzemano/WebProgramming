@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <title>Book Reservation - Welcome and choose a Book</title>
@@ -49,10 +49,11 @@
          Title: <book_title>, Genre: <book_genre>, Rating: <average_rating> -->
 
 
+    <div sec:authorize="hasRole('ADMIN')">
 
     <h1>Why not add a new book?</h1>
     <a th:href="@{/books/add}">Do it!!!</a>
-
+    </div>
   <form action="/bookReservation" method="POST">
       <h2>Choose a book:</h2>
       <div th:each="book : ${books}">
@@ -64,14 +65,14 @@
               , <span style="font-weight: bold">Author: </span> <span th:text="${book.getAuthor().getName()}"></span> <span th:text="${book.getAuthor().getSurname()}"></span>
           </label>
 
-
+          <div sec:authorize="hasRole('ADMIN')">
           <button type="submit"
                   th:formaction="@{'/books/delete/' + ${book.getId()}}"
                   formmethod="post">
               Delete
           </button>
           <a th:href="@{'/books/edit/' + ${book.getId()}}">Edit</a>
-
+          </div>
 
       </div>
 <!--
